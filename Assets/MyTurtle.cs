@@ -16,8 +16,17 @@ public class MyTurtle : TurtleBase
     // PenUp()
     // PenDown()
 
+    // [SerializeField]
+    // public struct FlowerDescription
+    // {
+    //     float basestem;
+    //     int basepetal;
+    //     float basesize;
+    //     int dir;
+    //     float spacing ;
+    // }
+    
 
-    // Start is called before the first frame update
     void Start()
     {
         float basestem= 0.5f;
@@ -26,8 +35,11 @@ public class MyTurtle : TurtleBase
         int dir = 1;
         float spacing = 1f;
 
-    for (int k =0; k < 2; k++) 
+
+
+    for (int k =0; k < 5; k++) 
 {
+    //flower generator
        for (float j =0; j < 16; j += spacing) 
        {
         Flower(basestem, basepetal, basesize, Color.HSVToRGB(Random.value,1,1) );
@@ -56,12 +68,15 @@ public class MyTurtle : TurtleBase
         Advance(stemsize);
 
         ChangeColor(flwrClr);
-        Turn(-90+180/petals);
+        Turn(FindPolygonAngle(petals));
         Polygon(petals, petalsize);
-        
-        Turn(180);
-        Advance(stemsize);
-        Turn(180);
+        // Turn(180);
+
+        PenUp();
+
+        Turn(-FindPolygonAngle(petals));
+        Advance(-stemsize);
+        // Turn(180);
         
     }
     void Polygon(int sides, float scale)
@@ -73,12 +88,20 @@ public class MyTurtle : TurtleBase
         {
 
             Advance(length);
-            Turn(angle);
+            Turn(AngleTurn(sides));
             
         }
-        PenUp();
-        Turn(90 + -180/sides);
+
         
     }
+        float FindPolygonAngle(int sides)
+        {
+        
+         return -90+180 / sides ;   
+        }
+        float AngleTurn(int sides)
+        {
+            return 360f / sides ;
+        }
 }
  

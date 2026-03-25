@@ -32,9 +32,12 @@ public class MyTurtle : TurtleBase
         float basestem= 0.5f;
         int basepetal=3;
         float basesize= 3;
-        int dir = 1;
         float spacing = 1f;
 
+
+
+
+        int dir = 1;
 
 
     for (int k =0; k < 5; k++) 
